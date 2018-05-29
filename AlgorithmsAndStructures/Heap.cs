@@ -15,12 +15,68 @@ namespace AlgorithmsAndStructures
             this.data = data;
         }
 
+        public void deleteMax()
+        {
+            this.data[getRootNodeIndex()] = getLastNode();
+            decreaseSize();
+            checkAreChildrenBigger(getRootNodeIndex());
+        }
+
+        public void checkAreChildrenBigger(int parentIndex)
+        {
+
+            int parent = getValue(parentIndex);
+            int childrenLeftIndex = getChildrenLeftIndex(parentIndex);
+            int childrenLeft;
+            int childrenRightIndex = getChildrenRightIndex(parentIndex);
+            int childrenRight;
+            if (childrenLeftIndex >= 0 && childrenRightIndex >= 0)
+            {
+                childrenLeft = getValue(childrenLeftIndex);
+                childrenRight = getValue(childrenRightIndex);
+                if (childrenRight >= childrenLeft)
+                {
+                    if (childrenRight > parent)
+                    {
+                        swapNodes(parentIndex, childrenRightIndex);
+                        checkAreChildrenBigger(childrenRightIndex);
+                    }
+                }
+                else
+                {
+                    if (childrenLeft > parent)
+                    {
+                        swapNodes(parentIndex, childrenLeftIndex);
+                        checkAreChildrenBigger(childrenLeftIndex);
+                    }
+                }
+
+            }
+            else if(childrenLeftIndex >= 0)
+            {
+                childrenLeft = getValue(childrenLeftIndex);
+                if (childrenLeft > parent)
+                {
+                    swapNodes(parentIndex, childrenLeftIndex);
+                    checkAreChildrenBigger(childrenLeftIndex);
+                }
+            }
+            else if (childrenRightIndex >= 0)
+            {
+                childrenRight = getValue(childrenRightIndex);
+                if (childrenRight > parent)
+                {
+                    swapNodes(parentIndex, childrenRightIndex);
+                    checkAreChildrenBigger(childrenRightIndex);
+                }
+            }
+        }
+
         public void insertValue(int value)
         {
             increaseSize();            
             this.data[getLastNodeIndex()] = value;
             checkIsParentSmaller(getLastNodeIndex());
-            //checkParentChildConstraint();
         }
 
         public void checkIsParentSmaller(int childIndex)
@@ -53,7 +109,8 @@ namespace AlgorithmsAndStructures
         public void decreaseSize()
         {
             int[] newData = new int[this.data.Length - 1];
-            this.data.CopyTo(newData, 0);
+            Array.Copy(data, 0, newData, 0, this.data.Length - 1);
+            //this.data.CopyTo(newData, 0);
             this.data = newData;
         }
 
