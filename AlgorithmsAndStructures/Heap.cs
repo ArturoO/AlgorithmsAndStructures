@@ -10,6 +10,11 @@ namespace AlgorithmsAndStructures
     {
         protected int[] data;
 
+        public Heap()
+        {
+            this.data = new int[0]{ };
+        }
+
         public Heap(int[] data)
         {
             this.data = data;

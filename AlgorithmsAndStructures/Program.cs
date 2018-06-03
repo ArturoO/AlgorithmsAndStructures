@@ -10,33 +10,64 @@ namespace AlgorithmsAndStructures
     {
         static void Main(string[] args)
         {
-            //int[] data = new int[] { 1, 2, 3, 4, 5};
-            //
-            //for(int i=0; i<data.Length; i++)
-            //{
-            //    Console.WriteLine("{0}: {1}", i, data[i]);
-            //}
-            //
-            //int[] newData = new int[data.Length - 1];
-            //Array.Copy(data, 0, newData, 0, data.Length - 1);
-            //
-            //data = newData;
-            //Console.WriteLine("after decreasing size");
-            //for (int i = 0; i < data.Length; i++)
-            //{
-            //    Console.WriteLine("{0}: {1}", i, data[i]);
-            //}
-            //
-            //return;
+            testBST();
+            Console.ReadLine();
+            return;
+
+            string input = Console.ReadLine();
+
+            switch (input)
+            {
+                case "heap":
+                    testHeap();
+                    break;
+            }
             testHeap();
+        }
+
+        static void testBST()
+        {
+            BST bst = new BST(10);
+
+            bst.insert(16);
+            bst.insert(13);
+            bst.insert(12);
+            bst.insert(15);
+            bst.insert(20);
+            bst.insert(18);
+            bst.insert(25);
+            bst.insert(6);
+            bst.insert(3);
+            bst.insert(1);
+            bst.insert(4);
+            bst.insert(8);
+            bst.insert(7);
+            bst.insert(9);
+            bst.insert(14);
+
+            bst.printInOrder();
+
+            int steps = 0; ;
+            BST result = bst.find(34, ref steps);
+            if (result == null)
+                Console.WriteLine("Value not found after {0} steps", steps);
+            else
+                Console.WriteLine("Value found after {0} steps", steps);
+        }
+
+        static void testTree()
+        {
+            //int* a;
+
+            return;
+            Node tree = new Node(10);
+            tree.insert(10);
         }
 
 
         static void testHeap()
         {
-
             int[] data = new int[] { 18, 16, 15, 11, 9, 12, 11, 6, 7, 3};
-
             Heap heap = new Heap(data);
             Console.WriteLine("Original heap");
             heap.print();
@@ -46,7 +77,6 @@ namespace AlgorithmsAndStructures
             Console.WriteLine("Heap after deleting max value");
             heap.deleteMax();
             heap.print();
-
         }
     }
 }
