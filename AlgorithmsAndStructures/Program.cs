@@ -10,19 +10,43 @@ namespace AlgorithmsAndStructures
     {
         static void Main(string[] args)
         {
-            testBST();
-            Console.ReadLine();
-            return;
+
+            testList();
 
             string input = Console.ReadLine();
-
+            return;
             switch (input)
             {
                 case "heap":
                     testHeap();
                     break;
+                case "bst":
+                    testBST();
+                    break;
             }
             testHeap();
+        }
+
+        static void testList()
+        {
+            List myList = new List(10);
+            myList.insert(7);
+            myList.insert(13);
+            myList.insert(33);
+            myList.insert(1);
+            myList.insert(17);
+            myList.insert(24);
+            myList.insert(5);
+            myList.insert(20);
+            myList.insert(55);
+            myList.insert(41);
+            myList.insert(0);
+            myList.insert(-5);
+            myList.print();
+            if(myList.find(21))
+                Console.WriteLine("Value found");
+            else
+                Console.WriteLine("Value not found");
         }
 
         static void testBST()
