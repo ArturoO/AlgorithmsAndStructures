@@ -11,12 +11,15 @@ namespace AlgorithmsAndStructures
         static void Main(string[] args)
         {
 
-            testList();
-
-            string input = Console.ReadLine();
+            testHeap();
             return;
+
+            string input = Console.ReadLine();            
             switch (input)
             {
+                case "list":
+                    testList();
+                    break;
                 case "heap":
                     testHeap();
                     break;
@@ -90,9 +93,18 @@ namespace AlgorithmsAndStructures
 
 
         static void testHeap()
-        {
-            int[] data = new int[] { 18, 16, 15, 11, 9, 12, 11, 6, 7, 3};
-            Heap heap = new Heap(data);
+        {   
+            Heap heap = new Heap(10);
+            heap.insertValue(18);
+            heap.insertValue(16);
+            heap.insertValue(15);
+            heap.insertValue(11);
+            heap.insertValue(9);
+            heap.insertValue(12);
+            heap.insertValue(11);
+            heap.insertValue(6);
+            heap.insertValue(7);
+            heap.insertValue(3);
             Console.WriteLine("Original heap");
             heap.print();
             Console.WriteLine("Heap after adding value 22");

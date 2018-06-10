@@ -9,27 +9,32 @@ namespace AlgorithmsAndStructures
     class Heap
     {
         protected int[] data;
+        protected int size;
+        protected int end;
 
         public Heap()
         {
-            this.data = new int[0]{ };
+            size = 10;
+            end = -1;
+            data = new int[size];
         }
 
-        public Heap(int[] data)
+        public Heap(int pSize)
         {
-            this.data = data;
+            size = pSize;
+            end = -1;
+            data = new int[size];
         }
 
         public void deleteMax()
         {
-            this.data[getRootNodeIndex()] = getLastNode();
-            decreaseSize();
+            swapNodes(getRootNodeIndex(), getLastNodeIndex());
+            end--;            
             checkAreChildrenBigger(getRootNodeIndex());
         }
 
         public void checkAreChildrenBigger(int parentIndex)
         {
-
             int parent = getValue(parentIndex);
             int childrenLeftIndex = getChildrenLeftIndex(parentIndex);
             int childrenLeft;
@@ -79,8 +84,10 @@ namespace AlgorithmsAndStructures
 
         public void insertValue(int value)
         {
-            increaseSize();            
-            this.data[getLastNodeIndex()] = value;
+            //check if end index has reached the max level
+            if(++end>=size)
+                increaseSize();
+            data[getLastNodeIndex()] = value;
             checkIsParentSmaller(getLastNodeIndex());
         }
 
@@ -99,24 +106,17 @@ namespace AlgorithmsAndStructures
 
         public void swapNodes(int index1, int index2)
         {
-            int temp = this.data[index1];
-            this.data[index1] = this.data[index2];
-            this.data[index2] = temp;
+            int temp =data[index1];
+           data[index1] =data[index2];
+           data[index2] = temp;
         }
 
         public void increaseSize()
         {
-            int[] newData = new int[this.data.Length+1];
-            this.data.CopyTo(newData, 0);
-            this.data = newData;            
-        }
-
-        public void decreaseSize()
-        {
-            int[] newData = new int[this.data.Length - 1];
-            Array.Copy(data, 0, newData, 0, this.data.Length - 1);
-            //this.data.CopyTo(newData, 0);
-            this.data = newData;
+            size *= 2;
+            int[] newData = new int[size];
+            data.CopyTo(newData, 0);
+            data = newData;
         }
 
         public int getRootNode()
@@ -136,12 +136,12 @@ namespace AlgorithmsAndStructures
 
         public int getLastNodeIndex()
         {
-            return this.data.Length-1;
+            return end;
         }
 
         public int getValue(int index)
         {
-            return this.data[index];
+            return data[index];
         }
 
         public int getParent(int index)
@@ -171,7 +171,7 @@ namespace AlgorithmsAndStructures
         public int getChildrenLeftIndex(int index)
         {
             int childLeft = index * 2 + 1;
-            if (childLeft < this.data.Length)
+            if (childLeft <data.Length)
                 return childLeft;
             else
                 return -1;
@@ -180,7 +180,7 @@ namespace AlgorithmsAndStructures
         public int getChildrenRightIndex(int index)
         {
             int childRight = index * 2 + 2;
-            if (childRight < this.data.Length)
+            if (childRight <data.Length)
                 return childRight;
             else
                 return -1;
@@ -188,7 +188,7 @@ namespace AlgorithmsAndStructures
 
         public void print()
         {
-            for(int i=0; i<this.data.Length; i++)
+            for (int i = 0; i <= end; i++)
             {
                 Console.WriteLine(getValue(i));
             }
