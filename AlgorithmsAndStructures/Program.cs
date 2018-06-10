@@ -10,11 +10,12 @@ namespace AlgorithmsAndStructures
     {
         static void Main(string[] args)
         {
-            testqSort();
-            return;
             string input = Console.ReadLine();            
             switch (input)
             {
+                case "heapSort":
+                    testHeapSort();
+                    break;
                 case "qsort":
                     testqSort();
                     break;
@@ -28,12 +29,11 @@ namespace AlgorithmsAndStructures
                     testBST();
                     break;
             }
-            testHeap();
         }
 
         static void testqSort()
-        {
-            int[] tab = new int[] { 29, 40, 2, 1, 6, 18, 20, 32, 23, 34, 39, 41 };
+        {            
+            int[] tab = new int[] { 29, 28, 2, 1, 6, 18, 20, 32, 23, 34, 39, 41 };
             Console.WriteLine("Before sort");
             for(int i=0; i<tab.Length; i++)
             {
@@ -48,22 +48,21 @@ namespace AlgorithmsAndStructures
 
         }
 
-
         static void qSort(int[] tab, int left, int right)
         {
             if(left<right)
             {
                 int m = left;
-                for(int i=left+1; i<=right; i++)
+                for (int i = left + 1; i <= right; i++)
                 {
-                    if(tab[i]<tab[left])
+                    if (tab[i] < tab[left])
                     {
                         swap(tab, ++m, i);
                     }
-                    swap(tab, left, m);
-                    qSort(tab, left, m - 1);
-                    qSort(tab, m+1, right);
                 }
+                swap(tab, left, m);
+                qSort(tab, left, m - 1);
+                qSort(tab, m+1, right);
             }
         }
 
@@ -149,5 +148,29 @@ namespace AlgorithmsAndStructures
             heap.deleteMax();
             heap.print();
         }
+
+        static void testHeapSort()
+        {
+            int[] tab = new int[] { 18, 16, 15, 11, 9, 12, 11, 6, 7, 3, 22 };
+            int[] tab2;
+
+            Heap heap = new Heap();
+            for (int i = 0; i < tab.Length; i++)
+                heap.insertValue(tab[i]);
+
+            //Console.WriteLine("Original heap");
+            //heap.print();
+            Console.WriteLine("Before sort");
+            for (int i = 0; i < tab.Length; i++)
+                Console.WriteLine(tab[i]);
+
+            tab2 = heap.sort();
+
+            Console.WriteLine("After sort");
+            for (int i = 0; i < tab2.Length; i++)
+                Console.WriteLine(tab2[i]);
+
+        }
+
     }
 }

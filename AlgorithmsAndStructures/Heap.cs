@@ -26,11 +26,15 @@ namespace AlgorithmsAndStructures
             data = new int[size];
         }
 
-        public void deleteMax()
+        public int deleteMax()
         {
-            swapNodes(getRootNodeIndex(), getLastNodeIndex());
+            int max = getRootNode();
+            data[getRootNodeIndex()] = data[getLastNodeIndex()];
+            data[getLastNodeIndex()] = 0;
+            //swapNodes(getRootNodeIndex(), getLastNodeIndex());
             end--;            
             checkAreChildrenBigger(getRootNodeIndex());
+            return max;
         }
 
         public void checkAreChildrenBigger(int parentIndex)
@@ -192,6 +196,17 @@ namespace AlgorithmsAndStructures
             {
                 Console.WriteLine(getValue(i));
             }
+        }
+
+        public int[] sort()
+        {
+            int[] tab = new int[end+1];
+            int max = end + 1;
+            for(int i=0; i<max; i++)
+            {
+                tab[i] = deleteMax();
+            }
+            return tab;
         }
 
     }
