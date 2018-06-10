@@ -10,9 +10,14 @@ namespace AlgorithmsAndStructures
     {
         static void Main(string[] args)
         {
+            testqSort();
+            return;
             string input = Console.ReadLine();            
             switch (input)
             {
+                case "qsort":
+                    testqSort();
+                    break;
                 case "list":
                     testList();
                     break;
@@ -25,6 +30,50 @@ namespace AlgorithmsAndStructures
             }
             testHeap();
         }
+
+        static void testqSort()
+        {
+            int[] tab = new int[] { 29, 40, 2, 1, 6, 18, 20, 32, 23, 34, 39, 41 };
+            Console.WriteLine("Before sort");
+            for(int i=0; i<tab.Length; i++)
+            {
+                Console.WriteLine(tab[i]);
+            }
+            qSort(tab, 0, tab.Length-1);
+            Console.WriteLine("After sort");
+            for (int i = 0; i < tab.Length; i++)
+            {
+                Console.WriteLine(tab[i]);
+            }
+
+        }
+
+
+        static void qSort(int[] tab, int left, int right)
+        {
+            if(left<right)
+            {
+                int m = left;
+                for(int i=left+1; i<=right; i++)
+                {
+                    if(tab[i]<tab[left])
+                    {
+                        swap(tab, ++m, i);
+                    }
+                    swap(tab, left, m);
+                    qSort(tab, left, m - 1);
+                    qSort(tab, m+1, right);
+                }
+            }
+        }
+
+        static void swap(int[] tab, int index1, int index2)
+        {
+            int temp = tab[index1];
+            tab[index1] = tab[index2];
+            tab[index2] = temp;
+        }
+
 
         static void testList()
         {
