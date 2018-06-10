@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinaryTree.cs" />
     <Compile Include="BST.cs" />
     <Compile Include="List.cs" />
     <Compile Include="Heap.cs" />

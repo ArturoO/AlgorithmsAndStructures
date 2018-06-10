@@ -10,10 +10,6 @@ namespace AlgorithmsAndStructures
     {
         static void Main(string[] args)
         {
-
-            testHeap();
-            return;
-
             string input = Console.ReadLine();            
             switch (input)
             {
@@ -81,16 +77,6 @@ namespace AlgorithmsAndStructures
             else
                 Console.WriteLine("Value found after {0} steps", steps);
         }
-
-        static void testTree()
-        {
-            //int* a;
-
-            return;
-            Node tree = new Node(10);
-            tree.insert(10);
-        }
-
 
         static void testHeap()
         {   
